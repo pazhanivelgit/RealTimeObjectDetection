@@ -1,5 +1,5 @@
 // Import dependencies
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import Webcam from "react-webcam";
@@ -9,6 +9,10 @@ import { drawRect } from "./utilities";
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+
+  const videoConstraints = {
+    facingMode: { exact: "environment" }
+  };
 
   // Main function
   const runCoco = async () => {
@@ -55,6 +59,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Webcam
+          videoConstraints={videoConstraints}
           ref={webcamRef}
           muted={true} 
           style={{
